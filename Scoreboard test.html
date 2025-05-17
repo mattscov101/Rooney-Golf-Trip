@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Scoreboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        .score-change {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-full mx-auto">
+        <!-- Header -->
+        <div class="bg-gray-800 text-white p-4 text-center">
+            <h1 class="text-2xl font-bold">LIVE SCOREBOARD</h1>
+            <p class="text-sm opacity-75" id="last-updated">Last updated: Loading...</p>
+        </div>
+
+        <!-- Scoreboard Ribbon -->
+        <div class="flex w-full">
+            <!-- Team 1 -->
+            <div class="w-1/2 bg-blue-600 text-white p-6 flex items-center justify-between">
+                <div class="text-center">
+                    <div class="text-xl font-bold" id="team1-name">Loading...</div>
+                    <div class="text-sm opacity-80" id="team1-meta">-</div>
+                </div>
+                <div class="text-5xl font-bold" id="team1-score">0</div>
+            </div>
+
+            <!-- VS Separator -->
+            <div class="bg-gray-800 text-white flex items-center justify-center px-4">
+                <span class="text-xl font-bold">VS</span>
+            </div>
+
+            <!-- Team 2 -->
+            <div class="w-1/2 bg-red-600 text-white p-6 flex items-center justify-between">
+                <div class="text-5xl font-bold" id="team2-score">0</div>
+                <div class="text-center">
+                    <div class="text-xl font-bold" id="team2-name">Loading...</div>
+                    <div class="text-sm opacity-80" id="team2-meta">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="bg-gray-200 p-4 flex justify-center space-x-4">
+            <button onclick="fetchData()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                <i class="fas fa-sync-alt mr-2"></i>Refresh
+            </button>
+            <div class="flex items-center">
+                <input type="checkbox" id="auto-refresh" class="mr-2" checked>
+                <label for="auto-refresh">Auto-refresh (30s)</label>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Google Sheets configuration
+        const SHEET_ID = '1XqOtPkiE_Q0dfGoyzU-d6x0XsfDppzwJZDFO0WGO7jg';
+        const SHEET_NAME = 'Scores';
+        const API_KEY = 'AIzaSyB9ZimtF9Xh3Xe7vzgWZr2Q1vRZq3Q3Q9E'; // Note: In production, use a restricted API key
+        
+        // Team data cache
+        let teamData = {
+            team1: { name: '', score: 0, meta: '' },
+            team2: { name: '', score: 0, meta: '' }
+        };
+        
+        // DOM elements
+        const elements = {
+            team1Name: document.getElementById('team1-name'),
+            team1Score: document.getElementById('team1-score'),
+            team1Meta: document.getElementById('team1-meta'),
+            team2Name: document.getElementById('team2-name'),
+            team2Score: document.getElementById('team2-score'),
+            team2Meta: document.getElementById('team2-meta'),
+            lastUpdated: document.getElementById('last-updated')
+        };
+        
+        // Auto-refresh interval
+        let refreshInterval;
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchData();
+            setupAutoRefresh();
+        });
+        
+        // Fetch data from Google Sheets
+        async function fetchData() {
+            try {
+                const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}!A1:D3?key=${API_KEY}`;
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.values && data.values.length >= 3) {
+                    // Extract team data (assuming specific sheet structure)
+                    const headers = data.values[0];
+                    const team1Data = data.values[1];
+                    const team2Data = data.values[2];
+                    
+                    // Update team data
+                    teamData.team1 = {
+                        name: team1Data[0] || 'Team 1',
+                        score: parseInt(team1Data[1]) || 0,
+                        meta: team1Data[2] || ''
+                    };
+                    
+                    teamData.team2 = {
+                        name: team2Data[0] || 'Team 2',
+                        score: parseInt(team2Data[1]) || 0,
+                        meta: team2Data[2] || ''
+                    };
+                    
+                    // Update UI
+                    updateUI();
+                    
+                    // Update timestamp
+                    const now = new Date();
+                    elements.lastUpdated.textContent = `Last updated: ${now.toLocaleTimeString()}`;
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                elements.lastUpdated.textContent = 'Error loading data. Retrying...';
+                setTimeout(fetchData, 5000);
+            }
+        }
+        
+        // Update the UI with current team data
+        function updateUI() {
+            // Team 1
+            elements.team1Name.textContent = teamData.team1.name;
+            elements.team1Meta.textContent = teamData.team1.meta;
+            
+            // Team 2
+            elements.team2Name.textContent = teamData.team2.name;
+            elements.team2Meta.textContent = teamData.team2.meta;
+            
+            // Handle score changes with animation
+            updateScoreWithAnimation(elements.team1Score, teamData.team1.score);
+            updateScoreWithAnimation(elements.team2Score, teamData.team2.score);
+        }
+        
+        // Update score with animation if it changed
+        function updateScoreWithAnimation(element, newScore) {
+            const currentScore = parseInt(element.textContent);
+            if (currentScore !== newScore) {
+                element.classList.add('score-change');
+                element.textContent = newScore;
+                setTimeout(() => {
+                    element.classList.remove('score-change');
+                }, 3000);
+            }
+        }
+        
+        // Set up auto-refresh
+        function setupAutoRefresh() {
+            const checkbox = document.getElementById('auto-refresh');
+            
+            checkbox.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    refreshInterval = setInterval(fetchData, 30000);
+                } else {
+                    clearInterval(refreshInterval);
+                }
+            });
+            
+            // Start with auto-refresh enabled
+            refreshInterval = setInterval(fetchData, 30000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friday Pairings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+		@keyframes slideIn {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        .golfer-card {
+            animation: slideIn 0.8s forwards;
+            animation-delay: calc(var(--order) * 0.2s);
+            opacity: 0;
+        }
+        
+        .hole-info {
+            animation: fadeIn 1s forwards;
+            animation-delay: 1s;
+            opacity: 0;
+        }
+        
+        .flag-icon {
+            animation: wave 2s infinite ease-in-out;
+        }
+        
+        @keyframes wave {
+            0%, 100% {
+                transform: rotate(-5deg);
+            }
+            50% {
+                transform: rotate(5deg);
+            }
+        }
+        
+        .tee-time {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .headshot {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .golfer-card:hover .headshot {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .country-flag {
+            width: 24px;
+            height: 16px;
+            border-radius: 2px;
+            margin-right: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-button {
+            transition: all 0.3s ease;
+            min-width: 180px;
+        }
+        
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .nav-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .group-counter {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            padding: 8px 16px;
+            font-weight: bold;
+            backdrop-filter: blur(5px);
+        }
+        
+        .team-badge {
+            position: absolute;
+            top: -35%;
+            right: 20px;
+            transform: translateY(-50%);
+            padding: 6px 12px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        
+        .team-S {
+            background-color: #3b82f6;
+            color: white;
+        }
+        
+        .team-G {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .tee-marker {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border-radius: 50%;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #333;
+            font-size: 12px;
+        }
+        .player-number {
+            position: relative;
+            border: 3px solid rgba(0, 0, 0, 1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-content {
+            position: relative;
+            width: 100%;
+        }
+        
+        .player-info-container {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .rules-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(236,253,245,0.95) 100%);
+        }
+        
+        .tee-box {
+            transition: all 0.3s ease;
+        }
+        
+        .tee-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .active-tab {
+            border-bottom: 3px solid #3b82f6;
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+    </style>
+</head>
+<body class="bg-green-50 min-h-screen">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mt-12 mb-12">
+            <h1 class="text-3xl font-bold mb-2 text-green-900">Friday Pairings</h1>
+			<p class="text-xl italic text-green-700">8v8 Best Ball: Best six (6) scores count on each hole. Losing teams buys dinner.</p>
+        </div>
+		
+		<!-- Palmer Course -->
+				<div class="course-card mb-12 rounded-xl shadow-lg overflow-hidden">
+                    <div class="relative h-24 bg-green-700 overflow-hidden">
+                        <img src="Courses/Palmer.jpg" 
+                             alt="Palmer Course" class="w-full h-full object-cover opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-green-900 to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-1xl font-bold text-white">Arnold Palmer Course</h3>
+                            <p class="text-green-200">Par 72 (6,065 yards)</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        
+                        <div class="flex justify-between items-center mb-4">
+                            
+                             <img width = "100%" src="Courses/Scorecard_Palmer.jpg" 
+                             alt="Palmer Course" class="w-full h-full object-cover">
+                            
+                        </div>
+                                                
+                    </div>
+                </div>
+        
+		<!-- Rules of Play Section -->
+        <div class="rules-card mb-12 rounded-xl shadow-lg overflow-hidden">
+            <div class="relative h-16 bg-green-700 overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-green-800 to-green-600 opacity-90"></div>
+                <div class="absolute inset-0 flex items-center px-6">
+                    <h3 class="text-xl font-bold text-white flex items-center">
+                        <i class="fas fa-golf-ball mr-3"></i> Rules of Play
+                    </h3>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-1 mr-3">
+                            <span class="tee-marker">W</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-green-800">Tee Box Selection</h4>
+                            <p class="text-gray-700 text-sm mt-1">Using the f****** white tees.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-1 mr-3">
+                            <span class="text-green-700 font-bold text-sm">1</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-green-800">Best Ball</h4>
+                            <p class="text-gray-700 text-sm mt-1">Each team member plays their own ball. The six lowest net score counts for the hole. Lowest team total wins.
+							</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-1 mr-3">
+                            <span class="text-green-700 font-bold text-sm">2</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-green-800">Maximum Score</h4>
+                            <p class="text-gray-700 text-sm mt-1">Highest score on a hole is double par plus 1. (e.g. 9 on a par 4)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-1 mr-3">
+                            <span class="text-green-700 font-bold text-sm">3</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-green-800">Pace of Play</h4>
+                            <p class="text-gray-700 text-sm mt-1">Maximum 4 hours 30 minutes per round. Unnecessary slow play will be treated with a warning.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="mt-8 bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-circle text-yellow-500 mt-1"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h4 class="font-bold text-yellow-800">Trip Rules</h4>
+                            <p class="text-yellow-700 text-sm mt-1">Lift, clean and place in effect in all circumstances. Place within one ball radius. No relief from a hazard. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+            <!-- Tee Time Display -->
+            <div class="tee-time bg-yellow-600 rounded-lg p-4 mb-8 text-center shadow-lg tee-time">
+                <h2 class="text-2xl font-bold text-white">Tee Time: <span id="tee-time-display" class="color-white">2:30 PM</span></h2>
+            </div>
+            
+            <!-- Pairings Container -->
+            <div class="space-y-6" id="pairings-container">
+                <!-- Player cards will be dynamically inserted here -->
+            </div>
+            
+            <!-- Controls -->
+            <div class="mt-12 mb-12 flex flex-col md:flex-row items-center justify-between">
+                <button id="prev-btn" onclick="previousGroup()" class="nav-button bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold mb-4 md:mb-0">
+                    <i class="fas fa-arrow-left mr-2"></i> Previous Group
+                </button>
+                
+                <div class="group-counter text-black mb-4 md:mb-0">
+                    Group <span id="current-group">1</span>/<span id="total-groups">4</span>
+                </div>
+                
+                <button id="next-btn" onclick="nextGroup()" class="nav-button bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold">
+                    Next Group <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+      
+
+    <script>
+        // Player data as variables for easy editing
+        const teamSPlayers = [
+            {
+                name: "Pat Rooney",
+                country: "United States",
+                flag: "us",
+                handicap: "2",
+                quote: "*snickers*",
+                image: "Headshots/Pat-removebg-preview.png"
+            },
+            {
+                name: "Bryant 'Bigs' Bigler ",
+                country: "United States",
+                flag: "us",
+                handicap: "15",
+                quote: 14,
+                image: "Headshots/Bigs-removebg-preview.png"
+            },
+            {
+                name: "Cory Cotrill",
+                country: "United States",
+                flag: "us",
+                handicap: "6",
+                quote: 7,
+                image: "Headshots/Cory-removebg-preview.png"
+            },
+            {
+                name: "Dan Cotrill",
+                country: "United States",
+                flag: "us",
+                handicap: "6",
+                quote: 6,
+                image: "Headshots/Dan-removebg-preview.png"
+            },
+            {
+                name: "Dan Ickes",
+                country: "United States",
+                flag: "us",
+                handicap: "9",
+                quote: 9,
+                image: "Headshots/Ickes-removebg-preview.png"
+            },
+            {
+                name: "Matt Scovell",
+                country: "England",
+                flag: "gb-eng",
+                handicap: "9",
+                quote: 13,
+                image: "Headshots/Scovell-removebg-preview.png"
+            },
+            {
+                name: "Evan Laub",
+                country: "United States",
+                flag: "us",
+                handicap: "4",
+                quote: 3,
+                image: "Headshots/Evan-removebg-preview.png"
+            },
+            {
+                name: "Ryan Billman",
+                country: "United States",
+                flag: "us",
+                handicap: "5",
+                quote: 4,
+                image: "Headshots/Billman-removebg-preview.png"
+            }
+        ];
+
+        const teamGPlayers = [
+            {
+                name: "Mark Gauer",
+                country: "United States",
+                flag: "us",
+                handicap: "9",
+                quote: 10,
+                image: "Headshots/Gauer-removebg-preview.png"
+            },
+            {
+                name: "Greg Williams",
+                country: "United States",
+                flag: "us",
+                handicap: "15",
+                quote: 15,
+                image: "Headshots/Greg-removebg-preview.png"
+            },
+            {
+                name: "Max King",
+                country: "United States",
+                flag: "us",
+                handicap: "1",
+                quote: 1,
+                image: "Headshots/Max-removebg-preview.png"
+            },
+            {
+                name: "Josh Shepard",
+                country: "United States",
+                flag: "us",
+                handicap: "9",
+                quote: 11,
+                image: "Headshots/Shepard-removebg-preview.png"
+            },
+            {
+                name: "Josh Schnitz",
+                country: "United States",
+                flag: "us",
+                handicap: "7",
+                quote: 8,
+                image: "Headshots/Josh_S-removebg-preview.png"
+            },
+            {
+                name: "Shawn Keenan",
+                country: "United States",
+                flag: "us",
+                handicap: "9",
+                quote: 11,
+                image: "Headshots/Shawn-removebg-preview.png"
+            },
+            {
+                name: "Tyler Zoner",
+                country: "United States",
+                flag: "us",
+                handicap: "5",
+                quote: 5,
+                image: "Headshots/Zoner-removebg-preview.png"
+            },
+            {
+                name: "Jeff Ondracek",
+                country: "United States",
+                flag: "us",
+                handicap: "15",
+                quote: 16,
+                image: "Headshots/Jeff-removebg-preview.png"
+            }
+        ];
+
+        // Group data - now built from the player variables
+        const groups = [
+            {
+                time: "2:30 PM",
+                players: [
+                    { ...teamSPlayers[0], team: "Scovell" },
+                    { ...teamSPlayers[1], team: "Scovell" },
+                    { ...teamSPlayers[2], team: "Scovell" },
+                    { ...teamSPlayers[3], team: "Scovell" }
+                ]
+            },
+            {
+                time: "2:38 PM",
+                players: [
+                    { ...teamGPlayers[0], team: "Gauer" },
+                    { ...teamGPlayers[1], team: "Gauer" },
+                    { ...teamGPlayers[2], team: "Gauer" },
+                    { ...teamGPlayers[3], team: "Gauer" }
+                ]
+            },
+            {
+                time: "2:46 PM",
+                players: [
+                    { ...teamSPlayers[4], team: "Scovell" },
+                    { ...teamSPlayers[5], team: "Scovell" },
+                    { ...teamSPlayers[6], team: "Scovell" },
+                    { ...teamSPlayers[7], team: "Scovell" }
+                ]
+            },
+            {
+                time: "2:54 PM",
+                players: [
+                    { ...teamGPlayers[4], team: "Gauer" },
+                    { ...teamGPlayers[5], team: "Gauer" },
+                    { ...teamGPlayers[6], team: "Gauer" },
+                    { ...teamGPlayers[7], team: "Gauer" }
+                ]
+            }
+        ];
+
+        let currentGroupIndex = 0;
+        const totalGroups = groups.length;
+
+        // Update the group counter display
+        function updateGroupCounter() {
+            document.getElementById('current-group').textContent = currentGroupIndex + 1;
+            document.getElementById('total-groups').textContent = totalGroups;
+            
+            // Update button states
+            document.getElementById('prev-btn').disabled = currentGroupIndex === 0;
+            document.getElementById('next-btn').disabled = currentGroupIndex === totalGroups - 1;
+        }
+
+        // Function to display a specific group
+        function displayGroup(index) {
+            const group = groups[index];
+            const container = document.getElementById('pairings-container');
+            
+            // Update tee time
+            document.getElementById('tee-time-display').textContent = group.time;
+            
+            // Clear current pairings
+            container.innerHTML = '';
+            
+            // Add new pairings
+            group.players.forEach((player, i) => {
+                const card = document.createElement('div');
+                card.className = 'golfer-card bg-gradient-to-r from-green-800 to-green-600 opacity-70 backdrop-blur-sm rounded-xl p-6 shadow-xl border border-green-300 border-opacity-30';
+                card.style.setProperty('--order', i);
+                
+                const teamClass = player.team === 'Scovell' ? 'team-S' : 'team-G';
+                
+                card.innerHTML = `
+                    <div class="card-content">
+                        <div class="flex items-center ml-4 mr-4">
+                            <!-- <div class="player-number w-16 h-16 rounded-full bg-white flex items-center justify-center text-3xl font-bold mr-4"> -->
+                                <!-- ${i + 1} -->
+                            <!-- </div> -->
+                            <div class="mr-4">
+                                <img src="${player.image}" alt="${player.name}" class="headshot">
+                            </div>
+                            <div class="player-info-container">
+                                <h3 class="text-2xl font-bold">${player.name}</h3>
+                                <div class="flex items-center text-green-200">
+                                    <img src="https://flagcdn.com/w20/${player.flag}.png" alt="${player.country}" class="country-flag">
+                                    <span>${player.country}</span>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xl">Handicap: <span class="font-bold">${player.handicap}</span></div>
+                                <div class="text-sm text-green-200">${player.quote}</div>
+                            </div>
+                        </div>
+                        <span class="team-badge ${teamClass}">Team ${player.team}</span>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+            
+            updateGroupCounter();
+        }
+              
+        // Function to show next group
+        function nextGroup() {
+            if (currentGroupIndex < totalGroups - 1) {
+                currentGroupIndex++;
+                displayGroup(currentGroupIndex);
+            }
+        }
+        
+        // Function to show previous group
+        function previousGroup() {
+            if (currentGroupIndex > 0) {
+                currentGroupIndex--;
+                displayGroup(currentGroupIndex);
+            }
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            displayGroup(0);
+        });
+    </script>
+</body>
+	
+	<footer class="bg-green-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <div class="golf-ball"></div>
+                        <h2 class="text-xl font-bold">Rooney Golf Trip</h2>
+                    </div>
+                    <p class="text-green-300 mt-2">August 22-24, 2025 • Wheeling, WV</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-green-300 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-green-300 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-green-300 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-green-300 hover:text-white transition"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-green-800 mt-6 pt-6 text-center text-green-400 text-sm">
+                <p>© 2025 Rooney Golf Trip. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oglebay Golf Weekend 2024</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .golf-ball {
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 30% 30%, white 0%, #f0f0f0 60%, #d9d9d9 100%);
+            border-radius: 50%;
+            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .golf-ball::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.05) 41%, rgba(0,0,0,0.05) 44%, transparent 45%),
+                repeating-radial-gradient(circle at 50% 50%, transparent 0%, transparent 3.5%, rgba(0,0,0,0.05) 3.5%, rgba(0,0,0,0.05) 4.5%, transparent 4.5%, transparent 8%);
+            border-radius: 50%;
+        }
+        .stat-bar {
+            height: 10px;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        .course-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,253,244,0.9) 100%);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        .team-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .hole-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+        .par-3 { background-color: #4ade80; }
+        .par-4 { background-color: #3b82f6; }
+        .par-5 { background-color: #f59e0b; }
+        .player-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .scroll-container {
+            scrollbar-width: thin;
+            scrollbar-color: #4ade80 #f0fdf4;
+        }
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .scroll-container::-webkit-scrollbar-track {
+            background: #f0fdf4;
+            border-radius: 10px;
+        }
+        .scroll-container::-webkit-scrollbar-thumb {
+            background-color: #4ade80;
+            border-radius: 10px;
+        }
+        .pairings-btn {
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .pairings-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-content {
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-green-50 min-h-screen">
+   
+    <main class="container mx-auto px-4 py-8">
+        <!-- Pairings Modal -->
+        <div id="pairingsModal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 opacity-0 invisible">
+            <div class="modal-content bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+                <div class="sticky top-0 bg-green-700 py-4 px-6 flex justify-between items-center">
+                    <h3 id="modalTitle" class="text-xl font-bold text-white">Pairings</h3>
+                    <button id="closeModal" class="text-white hover:text-gray-200">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div id="modalContent" class="p-6">
+                    <!-- Pairings content will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Schedule Section -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-24">
+            <div class="bg-green-700 py-4 px-6">
+                <h2 class="text-2xl font-bold text-white">Weekend Schedule</h2>
+            </div>
+            <div class="p-6">
+                <div class="space-y-6">
+                    <div class="border-l-4 border-green-500 pl-4 py-1">
+                        <h3 class="text-xl font-bold text-gray-800">Friday - Arrival Day</h3>
+                        <div class="mt-2 space-y-2">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-green-600 flex items-center justify-center">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">1:00 PM - Check-in at Oglebay Resort</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-green-600 flex items-center justify-center">
+                                    <i class="fas fa-golf-ball"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="text-gray-700">2:30 PM - Practice Round: Arnold Palmer Course (8v8 Best Ball)</p>
+                                            <p class="text-gray-700 indent-8 italic">- Best six (6) scores count on each hole. Losing teams buys dinner.</p>
+                                        </div>
+                                        <button data-round="practice" class="pairings-btn ml-4 px-3 py-1 bg-green-600 text-white rounded-full text-sm font-medium flex items-center whitespace-nowrap">
+                                            <i class="fas fa-users mr-1"></i> Pairings
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-green-600 flex items-center justify-center">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">7:00 PM - Welcome Dinner & Pairings Announcement</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-l-4 border-blue-500 pl-4 py-1">
+                        <h3 class="text-xl font-bold text-gray-800">Saturday - Day 1</h3>
+                        <div class="mt-2 space-y-2">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-blue-600 flex items-center justify-center">
+                                    <i class="fas fa-sun"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">7:00 AM - Breakfast</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-blue-600 flex items-center justify-center">
+                                    <i class="fas fa-golf-ball"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="text-gray-700">8:55 AM - Round 1: Arnold Palmer Course (2 Man Scramble / 2 Man Best Ball)</p>
+                                        </div>
+                                        <button data-round="round1" class="pairings-btn ml-4 px-3 py-1 bg-blue-600 text-white rounded-full text-sm font-medium flex items-center whitespace-nowrap">
+                                            <i class="fas fa-users mr-1"></i> Pairings
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-blue-600 flex items-center justify-center">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">2:00 PM - Lunch at the Turn</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-blue-600 flex items-center justify-center">
+                                    <i class="fas fa-golf-ball"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="text-gray-700">2:44 PM - Round 2: Crispin Course (2 Man Scramble / 2 Man Alt Shot)</p>
+                                        </div>
+                                        <button data-round="round2" class="pairings-btn ml-4 px-3 py-1 bg-blue-600 text-white rounded-full text-sm font-medium flex items-center whitespace-nowrap">
+                                            <i class="fas fa-users mr-1"></i> Pairings
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-blue-600 flex items-center justify-center">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">8:00 PM - Dinner & Day 1 Results</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-l-4 border-red-500 pl-4 py-1">
+                        <h3 class="text-xl font-bold text-gray-800">Sunday - Day 2</h3>
+                        <div class="mt-2 space-y-2">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-red-600 flex items-center justify-center">
+                                    <i class="fas fa-sun"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">7:00 AM - Breakfast</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-red-600 flex items-center justify-center">
+                                    <i class="fas fa-golf-ball"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="text-gray-700">8:48 AM - Round 2: Robert Trent Jones Course (2 Man Scramble / Head-to-Head)</p>
+                                        </div>
+                                        <button data-round="round3" class="pairings-btn ml-4 px-3 py-1 bg-red-600 text-white rounded-full text-sm font-medium flex items-center whitespace-nowrap">
+                                            <i class="fas fa-users mr-1"></i> Pairings
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-red-600 flex items-center justify-center">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">1:00 PM - Lunch & Celebration</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-red-600 flex items-center justify-center">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">3:00 PM - Departures</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Sample pairings data
+        const pairingsData = {
+            practice: {
+                title: "Practice Round Pairings - Arnold Palmer Course",
+                description: "8v8 Best Ball - Best six (6) scores count on each hole",
+                teams: [
+                    {
+                        name: "Team A",
+                        players: ["John Smith", "Mike Johnson", "David Williams", "Robert Brown", 
+                                 "James Davis", "Richard Miller", "Charles Wilson", "Thomas Moore"]
+                    },
+                    {
+                        name: "Team B",
+                        players: ["William Taylor", "Daniel Anderson", "Matthew Thomas", "Joseph Jackson", 
+                                 "Christopher White", "Andrew Harris", "Edward Martin", "Joshua Garcia"]
+                    }
+                ]
+            },
+            round1: {
+                title: "Round 1 Pairings - Arnold Palmer Course",
+                description: "2 Man Scramble / 2 Man Best Ball",
+                groups: [
+                    {
+                        teeTime: "8:55 AM",
+                        pairings: [
+                            { team1: ["John Smith", "Mike Johnson"], team2: ["William Taylor", "Daniel Anderson"] },
+                            { team1: ["David Williams", "Robert Brown"], team2: ["Matthew Thomas", "Joseph Jackson"] }
+                        ]
+                    },
+                    {
+                        teeTime: "9:05 AM",
+                        pairings: [
+                            { team1: ["James Davis", "Richard Miller"], team2: ["Christopher White", "Andrew Harris"] },
+                            { team1: ["Charles Wilson", "Thomas Moore"], team2: ["Edward Martin", "Joshua Garcia"] }
+                        ]
+                    }
+                ]
+            },
+            round2: {
+                title: "Round 2 Pairings - Crispin Course",
+                description: "2 Man Scramble / 2 Man Alt Shot",
+                groups: [
+                    {
+                        teeTime: "2:44 PM",
+                        pairings: [
+                            { team1: ["John Smith", "William Taylor"], team2: ["Mike Johnson", "Daniel Anderson"] },
+                            { team1: ["David Williams", "Matthew Thomas"], team2: ["Robert Brown", "Joseph Jackson"] }
+                        ]
+                    },
+                    {
+                        teeTime: "2:55 PM",
+                        pairings: [
+                            { team1: ["James Davis", "Christopher White"], team2: ["Richard Miller", "Andrew Harris"] },
+                            { team1: ["Charles Wilson", "Edward Martin"], team2: ["Thomas Moore", "Joshua Garcia"] }
+                        ]
+                    }
+                ]
+            },
+            round3: {
+                title: "Round 3 Pairings - Robert Trent Jones Course",
+                description: "2 Man Scramble / Head-to-Head",
+                groups: [
+                    {
+                        teeTime: "8:48 AM",
+                        pairings: [
+                            { team1: ["John Smith", "Joshua Garcia"], team2: ["William Taylor", "Thomas Moore"] },
+                            { team1: ["Mike Johnson", "Edward Martin"], team2: ["Daniel Anderson", "Charles Wilson"] }
+                        ]
+                    },
+                    {
+                        teeTime: "8:59 AM",
+                        pairings: [
+                            { team1: ["David Williams", "Andrew Harris"], team2: ["Matthew Thomas", "Richard Miller"] },
+                            { team1: ["Robert Brown", "Christopher White"], team2: ["Joseph Jackson", "James Davis"] }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // Modal functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('pairingsModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            const closeModal = document.getElementById('closeModal');
+            const pairingsButtons = document.querySelectorAll('.pairings-btn');
+            
+            // Show modal with pairings
+            pairingsButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const round = this.getAttribute('data-round');
+                    const data = pairingsData[round];
+                    
+                    modalTitle.textContent = data.title;
+                    
+                    // Generate content based on round type
+                    let content = `
+                        <div class="mb-6">
+                            <p class="text-gray-700 font-medium">${data.description}</p>
+                        </div>
+                    `;
+                    
+                    if (round === 'practice') {
+                        // Practice round has teams format
+                        content += `
+                            <div class="space-y-6">
+                                ${data.teams.map(team => `
+                                    <div class="bg-gray-50 p-4 rounded-lg">
+                                        <h4 class="text-lg font-bold text-green-700 mb-3">${team.name}</h4>
+                                        <ul class="space-y-2">
+                                            ${team.players.map(player => `
+                                                <li class="flex items-center">
+                                                    <div class="golf-ball mr-3"></div>
+                                                    <span class="text-gray-700">${player}</span>
+                                                </li>
+                                            `).join('')}
+                                        </ul>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    } else {
+                        // Other rounds have tee times format
+                        content += `
+                            <div class="space-y-8">
+                                ${data.groups.map(group => `
+                                    <div>
+                                        <h4 class="text-lg font-bold text-gray-800 mb-3">Tee Time: ${group.teeTime}</h4>
+                                        <div class="space-y-4">
+                                            ${group.pairings.map((pairing, index) => `
+                                                <div class="bg-gray-50 p-4 rounded-lg">
+                                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                        <div>
+                                                            <h5 class="font-medium text-gray-700 mb-2">Team 1</h5>
+                                                            <ul class="space-y-2">
+                                                                ${pairing.team1.map(player => `
+                                                                    <li class="flex items-center">
+                                                                        <div class="golf-ball mr-3"></div>
+                                                                        <span class="text-gray-700">${player}</span>
+                                                                    </li>
+                                                                `).join('')}
+                                                            </ul>
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="font-medium text-gray-700 mb-2">Team 2</h5>
+                                                            <ul class="space-y-2">
+                                                                ${pairing.team2.map(player => `
+                                                                    <li class="flex items-center">
+                                                                        <div class="golf-ball mr-3"></div>
+                                                                        <span class="text-gray-700">${player}</span>
+                                                                    </li>
+                                                                `).join('')}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+                    
+                    modalContent.innerHTML = content;
+                    modal.classList.add('active');
+                });
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                modal.classList.remove('active');
+            });
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooney Golf Trip 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .stat-bar {
+            height: 10px;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        .course-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,253,244,0.9) 100%);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        .player-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            align-items: space-between;
+
+        }
+        .player-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+		.teetime {
+			display: flex;
+			justify-content: space-between;
+		}
+        .hole-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+        .par-3 { background-color: #4ade80; }
+        .par-4 { background-color: #3b82f6; }
+        .par-5 { background-color: #f59e0b; }
+        .player-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+		
+		.player-image {
+			width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+			object-fit: cover;
+		}
+				
+		.player-stats {
+			margin-bottom: 4px;
+		}
+		
+        .player-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;        
+            padding: 1em
+        }
+        
+        .player-bio {
+                /* border: 1px solid gray;  */
+                height: 100%; 
+                font-size: 0.8em;
+                font-weight: 500;
+                color: #374151;
+                background-color: #f3f4f6;
+                border-radius: 1em;
+                text-align: justify;
+        }
+		
+		.pairings-btn {
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .pairings-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }	
+		
+		.scorecard-image {
+			width: 100%;
+			max-width: 500px;
+            height: auto;
+            object-fit: cover;
+			margin: auto
+		}
+		
+        .scroll-container {
+            scrollbar-width: thin;
+            scrollbar-color: #4ade80 #f0fdf4;
+        }
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .scroll-container::-webkit-scrollbar-track {
+            background: #f0fdf4;
+            border-radius: 10px;
+        }
+        .scroll-container::-webkit-scrollbar-thumb {
+            background-color: #4ade80;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-green-50 min-h-screen">
+    <header class="bg-green-800 text-white py-6 shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-3xl font-bold">Rooney Golf Trip 2025</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+	
+	
+	<div class="max-w-full mx-auto">
+        
+		<!-- Scoreboard Ribbon -->
+        <div class="flex w-full">
+            <!-- Team 1 -->
+            <div class="w-1/2 bg-blue-600 text-white p-6 flex items-center justify-between">
+                <div class="text-center">
+                    <div class="text-2xl font-bold" id="team1-name">Team Scovell</div>
+                </div>
+                <div class="text-5xl font-bold" id="team1-score">0</div>
+            </div>
+
+            <!-- VS Separator -->
+            <div class="bg-gray-800 text-white flex items-center justify-center px-4">
+                <span class="text-xl font-bold">VS</span>
+            </div>
+
+            <!-- Team 2 -->
+            <div class="w-1/2 bg-red-600 text-white p-6 flex items-center justify-between">
+                <div class="text-5xl font-bold" id="team2-score">0</div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold" id="team2-name">Team Gauer</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="bg-gray-200 p-4 flex justify-center space-x-4">
+            <button onclick="fetchData()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                <i class="fas fa-sync-alt mr-2"></i>Refresh
+            </button>
+            <div class="flex items-center">
+                <input type="checkbox" id="auto-refresh" class="mr-2" checked>
+                <label for="auto-refresh">Auto-refresh (30s)</label>
+            </div>
+        </div>
+    </div>
+	
+	
+    <main class="container mx-auto px-4 py-8">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-green-900 mb-2">Team Matchup</h2>
+            <p class="text-lg text-green-700 max-w-2xl mx-auto">Friday 22nd August to Sunday 24th August</p>
+        </div>
+		
+        <div class="flex flex-col lg:flex-row gap-8 mb-8">
+            
+			<!-- Team Scovell -->					
+            <div class="flex-1">
+                <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-4 mb-6 shadow-lg">
+                    <div class="flex items-center">
+                        <h2 class="text-2xl font-bold text-white">Team Scovell</h2>
+                        <span class="ml-auto bg-white text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">8 Players</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				
+                    <!-- Matt Scovell (Captain Team 1) -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative justify-between">
+                        
+						<div>
+							<img class="player-image" height="100" src="Headshots/Scovell-removebg-preview.png" alt="">
+						</div>
+						
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Matt Scovell</h3>
+                                    <p class="text-gray-600">Handicap: 9</p>
+                                </div>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-semibold">Captain</span>
+                            </div>
+							
+                            <div class="mt-4 mb-4">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        Whether he likes it or not, Scovell is the token British guy on the trip. With loud reactions on the course, exceptional phrases, and the dealer of Death Box, his contributions aren't just golf related. Although Matt doesn't have much golf on his schedule these days, he can get hot and be a force when the swing is in the right slot.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+                                                                
+								<div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bryant Bigler -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Bigs-removebg-preview.png" alt="">
+						</div>
+						
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Bryant Bigler</h3>
+                                    <p class="text-gray-600">Handicap: 15</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        Bigs is a gentle giant. He plays about 5 rounds of golf per year, 4 of which are on this trip. Although his golf skills may be lacking, he's an exceptional teammate who gets excited for good shots and can hype up his teammate in his own Bigs-y way. Handicap strokes are important, and a par from Bigs in a critical moment can go a long way.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pat Rooney -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Pat-removebg-preview.png" alt="">
+						</div>
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Pat Rooney</h3>
+                                    <p class="text-gray-600">Handicap: 2</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        Pat is the commissioner and namesake of the Rooney Golf Trip. He takes great pride in organizing this yearly event and getting his friends out for a weekend of golf, beers, and fun with the boys. Pat doesn’t hit the ball far, but he’s a wizard with a wedge around the green. His golf game is extremely boring, but it's also quite good.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    					
+					<!-- Ryan Billman -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Billman-removebg-preview.png" alt="">
+						</div>
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Ryan Billman</h3>
+                                    <p class="text-gray-600">Handicap: 5</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        Known as "Billman" to many in the group, Ryan's handicap has been a topic of discussion since the inception of the Rooney golf trip. He’s a bomber off the tee with a propensity to post the rogue big number. When he's on, he can be unstoppable, but when he's off...well… you can better understand his handicap.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>								
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+										
+					<!-- Dan Cottrill -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Dan-removebg-preview.png" alt="">
+						</div>
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Dan Cottrill</h3>
+                                    <p class="text-gray-600">Handicap: 6</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        An OG captain of the Rooney Golf trip, Dan has been part of some of the most high-pressure situations in the history of the event. He loves golf, loves big time moments, and loves to match his golf hat with his golf belt. A good player with a lot of skills and power, he's constantly one YouTube video away from "figuring it out."
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>								
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					
+					<!-- Tyler Zoner -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Zoner-removebg-preview.png" alt="">
+						</div>
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Tyler Zoner</h3>
+                                    <p class="text-gray-600">Handicap: 6</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">Zoner is one of the few high school golfers on the trip. With broad shoulders and a Jesper Parnevik vibe, his golf aesthetic is aspirational. Although the constant motion style of his swing is unique, his golf experience and understanding of the game can provide an edge for him and his teammate. Tyler wears his emotions on his sleeve and momentum can play a key role in his matches, for better or worse.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+					
+					<!-- Josh Shepard -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Shepard-removebg-preview.png" alt="">
+						</div>
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Josh Shepard</h3>
+                                    <p class="text-gray-600">Handicap: 9</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        Shepard may play the most golf of anybody in the group. He's constantly traveling the world and playing great courses any chance he gets. He's also constantly shooting 95's, which is why he's a 9 handicap. The lefty is an exceptional vibes guy on the course, he loves hitting shots off the grass and occasionally smoking it too.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+					
+					<!-- Greg Williams -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Greg-removebg-preview.png" alt="">
+						</div>
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Greg Williams</h3>
+                                    <p class="text-gray-600">Handicap: 15</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        Greg is the newest member of the trip. The lefty grew up a baseball guy and you can certainly see that influence with a couple high fly balls to foul territory every round. He knows his game might not be top notch, but he does know how to use his handicap strokes to his advantage. He also knows a lot about Cleveland sports for what that's worth.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+					
+                </div>
+            </div>
+            
+            <!-- Team Gauer -->
+            <div class="flex-1">
+                <div class="bg-gradient-to-r from-red-900 to-red-700 rounded-xl p-4 mb-6 shadow-lg">
+                    <div class="flex items-center">
+                        <h2 class="text-2xl font-bold text-white">Team Gauer</h2>
+                        <span class="ml-auto bg-white text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">8 Players</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Mark Gauer (Captain) -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Gauer-removebg-preview.png" alt="">
+						</div>
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Mark Gauer</h3>
+                                    <p class="text-gray-600">Handicap: 9</p>
+                                </div>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-semibold">Captain</span>
+                            </div>
+							
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        Gauer is a power player who can absolutely mash the golf ball but can struggle with consistency. As somebody who can bench 400lbs and looks like that one guy from Twilight, he at least looks the part of an elite golfer. Mark's best skill may be his sunny disposition, an exceptional teammate who's always down to hang with the boys.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div> 
+                            </div>
+                                                        
+                        </div>
+                    </div>
+                    
+                    <!-- Max King -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Max-removebg-preview.png" alt="">
+						</div>
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Max King</h3>
+                                    <p class="text-gray-600">Handicap: 1</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        Max is the "ace" of this golf group. He can bomb the ball off the tee but has all the other skills required to go low. With a unique blend of golf skill and self-deprecating humor, he’s the type of scratch player you want on a buddies trip. As a former member of the T-Town high school golf team, he's an expert at slinging draws and slinging beers.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                                                          
+                    <!-- Josh Schnitzler -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Josh-removebg-preview.png" alt="">
+						</div>
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Josh Schnitzler</h3>
+                                    <p class="text-gray-600">Handicap: 7</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        As shown in his ratings, Schnitz is the epitome of an all-around golfer. Shooting low scores are attainable when his tight, 5-yard draw is working. A true student of the game and a fiery competitor, Josh always knows where he’s at in a match and will fight tooth and nail to win. It's rumored he's never missed a 4ft putt when it mattered.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+					
+					<!-- Dan Ickes -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Ickes-removebg-preview.png" alt="">
+						</div>
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Dan Ickes</h3>
+                                    <p class="text-gray-600">Handicap: 9</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        Ickes can destroy the ball and is happy to let you know about it when he does. Nothing brings him more joy than outdriving his playing partners. Unfortunately, he's also destroyed some house siding, as the big left (and right) miss is frequently in play. A power player with high volatility, Dan can swing a match when the big stick is working.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+																		
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					
+					
+					<!-- Shawn Keenan -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Shawn-removebg-preview.png" alt="">
+						</div>
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Shawn Keenan</h3>
+                                    <p class="text-gray-600">Handicap: 9</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        Shawn "one-arm" Keenan has had quite the golfing journey in the last year. A hand injury caused him to swing one-handed for half of 2024. While inexplicably improving his driving, it simultaneously tanked his iron play. With a golf game as awkward as his personality, and a wide-ranging selection of colorful golf polos, you never really know what you're gonna get.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+													
+					<!-- Jeff Ondracek -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Jeff-removebg-preview.png" alt="">
+						</div>
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Jeff Ondracek</h3>
+                                    <p class="text-gray-600">Handicap: 11</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        Jeff is the only Florida man (and doctor) in the group. The long travel to this trip shows his dedication to golf and, more importantly, hanging out with his long-time friends. Although being able to play year-round hasn't made him a scratch golfer yet, it has improved his game to make him a sneaky good contributor on this trip.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+					
+					<!-- Evan Laub -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Evan-removebg-preview.png" alt="">
+						</div>
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Evan Laub</h3>
+                                    <p class="text-gray-600">Handicap: 4</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        Evan is making his triumphant return to the Rooney golf trip after a couple year's hiatus. His swing speed for his size is remarkable and has a solid all-around game. He's one of the nicest guys you've ever met but relishes the chance to compete and talk shit as much as possible.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>							
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+										
+					<!-- Cory Cottrill -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div>
+							<img class="player-image" height="100" src="Headshots/Cory-removebg-preview.png" alt="">
+						</div>
+                        <div class="player-info">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Cory Cottrill</h3>
+                                    <p class="text-gray-600">Handicap: 7</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="player-bio px-2 py-1 bg-gray-100">
+                                        Since joining a country club last year, Cory has improved as a golfer. With an unorthodox swing and an even more unorthodox thinking process (Cory logic), he's able to effectively manage his way around a course. Although his pinky's may be bent, but his ball goes pretty straight. Cory’s end of match battles with his cousin Dan have been a cornerstone of the Rooney Golf trip.
+                                    </span>
+                                </div>
+                            </div>
+							
+                            <div class="player-stats mt-8 mb-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Irons</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>								
+									</span>
+                                </div>
+								
+								<div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+										<i class="fa-solid fa-golf-ball-tee"></i>
+									</span>
+                                </div>
+                                                                
+                                <div class="mt-4 flex justify-between">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 0 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Points
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Courses Section -->
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-green-900 mb-6 text-center">Oglebay Courses</h2>
+            <div class="grid md:grid-rows-3 gap-6">
+                
+				<!-- Palmer Course -->
+				<div class="course-card rounded-xl shadow-lg overflow-hidden">
+                    <div class="relative h-48 bg-green-700 overflow-hidden">
+                        <img src="Courses/Palmer.jpg" 
+                             alt="Palmer Course" class="w-full h-full object-cover opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-green-900 to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-2xl font-bold text-white">Arnold Palmer Course</h3>
+                            <p class="text-green-200">Par 72 (6,065 yards)</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Championship</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Bentgrass</span>
+                            </div>
+                            <div class="text-yellow-600">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-4">Location of the iconic match winning putt on 18 between the Cottril's in 2022. Arnold Palmer's signature course featuring rolling fairways, strategic bunkering, and challenging greens that demand precision.</p>
+                        
+                        <div class="flex justify-between items-center mb-4">
+                            <img src="Courses/Scorecard_Palmer.jpg" alt="Palmer Course" class="scorecard-image">
+                        </div>
+                                                
+                    </div>
+                </div>
+
+				<!-- Crispin Course -->
+                <div class="course-card rounded-xl shadow-lg overflow-hidden">
+                    <div class="relative h-48 bg-green-700 overflow-hidden">
+                        <img src="Courses/Crispin.jpg" 
+                             alt="Palmer Course" class="w-full h-full object-cover opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-green-900 to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-2xl font-bold text-white">Crispin Course</h3>
+                            <p class="text-green-200">Par 71 (5,384 yards)</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Municipal</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Bentgrass</span>
+                            </div>
+                            <div class="text-yellow-600">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+								<i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-4">The Cripsin course plays to the strengths of the accurate golfers and short game wizards. Maintaining the scenic views and lob-sided stances this course takes the edge of distance but no less of challenge.</p>
+                        
+						<img src="Courses/Scorecard_Crispin.jpg" alt="Crispin Course" class="scorecard-image">
+                        
+                    </div>
+                </div>
+				
+				<!-- JONES Course -->
+                <div class="course-card rounded-xl shadow-lg overflow-hidden">
+                    <div class="relative h-48 bg-green-700 overflow-hidden">
+                        <img src="Courses/Jones.jpg" 
+                             alt="Palmer Course" class="w-full h-full object-cover opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-green-900 to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-6">
+                            <h3 class="text-2xl font-bold text-white">Robert Trent Jones Sr. Course</h3>
+                            <p class="text-green-200">Par 71 (6,046 yards)</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Municipal</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">Bentgrass</span>
+                            </div>
+                            <div class="text-yellow-600">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+								<i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-4">The Jones course remarkably tricky. Drive off with the hardest hole on the course in front of crowd. This will be a test of each players endurance and ability to keep their game together on the final day.</p>
+                        
+                        <div class="flex justify-between items-c
+						enter mb-4">
+                            
+                                <img src="Courses/Scorecard_Jones.jpg" 
+                             alt="Crispin Course" class="scorecard-image">
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+        <!-- Schedule Section -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-24">
+            <div class="bg-green-700 py-4 px-6">
+                <h2 class="text-2xl font-bold text-white">Weekend Schedule</h2>
+            </div>
+            <div class="p-6">
+                <div class="space-y-6">
+                    <div class="border-l-4 border-green-500 pl-4 py-1">
+                        <h3 class="text-xl font-bold text-gray-800">Friday - Arrival Day</h3>
+                        <div class="mt-2 space-y-2">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-green-600 flex items-center justify-center">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">1:00 PM - Check-in at Oglebay Resort</p>
+                                </div>
+                            </div>
+                            <div class="teetime">
+                                <div class="flex-shrink-0 h-6 w-6 text-green-600 flex items-center justify-center">
+                                    <i class="fas fa-golf-ball"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">2:30 PM - Practice Round: Arnold Palmer Course (8v8 Best Ball)</p>
+									<p class="text-gray-700 indent-8 italic">- Best six (6) scores count on each hole. Losing teams buys dinner. </p>
+                                </div>
+								<div class="ml-auto">
+								<a href="friday_pairings.html">
+									<button class="pairings-btn ml-0 px-3 py-1 bg-green-600 text-white rounded-full text-sm font-medium whitespace-nowrap">
+                                            <i class="fas fa-users mr-1"></i> Pairings
+									</button>
+								</a>
+								</div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-green-600 flex items-center justify-center">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">7:00 PM - Welcome Dinner & Pairings Announcement</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-l-4 border-blue-500 pl-4 py-1">
+                        <h3 class="text-xl font-bold text-gray-800">Saturday - Day 1</h3>
+                        <div class="mt-2 space-y-2">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-blue-600 flex items-center justify-center">
+                                    <i class="fas fa-sun"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">7:00 AM - Breakfast</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-blue-600 flex items-center justify-center">
+                                    <i class="fas fa-golf-ball"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">8:55 AM - Round 1: Arnold Palmer Course (2 Man Scramble / 2 Man Best Ball)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-blue-600 flex items-center justify-center">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">2:00 PM - Lunch at the Turn</p>
+                                </div>
+                            </div>
+							<div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-blue-600 flex items-center justify-center">
+                                    <i class="fas fa-golf-ball"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">2:44 PM - Round 2: Crispin Course (2 Man Scramble / 2 Man Alt Shot)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-blue-600 flex items-center justify-center">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">8:00 PM - Dinner & Day 1 Results</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-l-4 border-red-500 pl-4 py-1">
+                        <h3 class="text-xl font-bold text-gray-800">Sunday - Day 2</h3>
+                        <div class="mt-2 space-y-2">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-red-600 flex items-center justify-center">
+                                    <i class="fas fa-sun"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">7:00 AM - Breakfast</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-red-600 flex items-center justify-center">
+                                    <i class="fas fa-golf-ball"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">8:48 AM - Round 2: Robert Trent Jones Course (2 Man Scramble / Head-to-Head)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-red-600 flex items-center justify-center">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">1:00 PM - Lunch & Celebration</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 text-red-600 flex items-center justify-center">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">3:00 PM - Departures</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+	
+	<script>
+        // Player data as variables for easy editing
+        const teamSPlayers = [
+            {
+                name: "Pat Rooney",
+                country: "United States",
+                flag: "us",
+                handicap: "2",
+                quote: "*snickers*",
+                image: "Headshots/Pat-removebg-preview.png"
+            },
+            {
+                name: "Bryant 'Bigs' Bigler ",
+                country: "United States",
+                flag: "us",
+                handicap: "15",
+                quote: 14,
+                image: "Headshots/Bigs-removebg-preview.png"
+            },
+            {
+                name: "Cory Cotrill",
+                country: "United States",
+                flag: "us",
+                handicap: "6",
+                quote: 7,
+                image: "Headshots/Cory-removebg-preview.png"
+            },
+            {
+                name: "Dan Cotrill",
+                country: "United States",
+                flag: "us",
+                handicap: "6",
+                quote: 6,
+                image: "Headshots/Dan-removebg-preview.png"
+            },
+            {
+                name: "Dan Ickes",
+                country: "United States",
+                flag: "us",
+                handicap: "9",
+                quote: 9,
+                image: "Headshots/Ickes-removebg-preview.png"
+            },
+            {
+                name: "Matt Scovell",
+                country: "England",
+                flag: "gb-eng",
+                handicap: "9",
+                quote: 13,
+                image: "Headshots/Scovell-removebg-preview.png"
+            },
+            {
+                name: "Evan Laub",
+                country: "United States",
+                flag: "us",
+                handicap: "4",
+                quote: 3,
+                image: "Headshots/Evan-removebg-preview.png"
+            },
+            {
+                name: "Ryan Billman",
+                country: "United States",
+                flag: "us",
+                handicap: "5",
+                quote: 4,
+                image: "Headshots/Billman-removebg-preview.png"
+            }
+        ];
+
+        const teamGPlayers = [
+            {
+                name: "Mark Gauer",
+                country: "United States",
+                flag: "us",
+                handicap: "9",
+                quote: 10,
+                image: "Headshots/Gauer-removebg-preview.png"
+            },
+            {
+                name: "Greg Williams",
+                country: "United States",
+                flag: "us",
+                handicap: "15",
+                quote: 15,
+                image: "Headshots/Greg-removebg-preview.png"
+            },
+            {
+                name: "Max King",
+                country: "United States",
+                flag: "us",
+                handicap: "1",
+                quote: 1,
+                image: "Headshots/Max-removebg-preview.png"
+            },
+            {
+                name: "Josh Shepard",
+                country: "United States",
+                flag: "us",
+                handicap: "9",
+                quote: 11,
+                image: "Headshots/Shepard-removebg-preview.png"
+            },
+            {
+                name: "Josh Schnitz",
+                country: "United States",
+                flag: "us",
+                handicap: "7",
+                quote: 8,
+                image: "Headshots/Josh_S-removebg-preview.png"
+            },
+            {
+                name: "Shawn Keenan",
+                country: "United States",
+                flag: "us",
+                handicap: "9",
+                quote: 11,
+                image: "Headshots/Shawn-removebg-preview.png"
+            },
+            {
+                name: "Tyler Zoner",
+                country: "United States",
+                flag: "us",
+                handicap: "5",
+                quote: 5,
+                image: "Headshots/Zoner-removebg-preview.png"
+            },
+            {
+                name: "Jeff Ondracek",
+                country: "United States",
+                flag: "us",
+                handicap: "15",
+                quote: 16,
+                image: "Headshots/Jeff-removebg-preview.png"
+            }
+        ];
+
+        // Group data - now built from the player variables
+        const groups = [
+            {
+                time: "2:30 PM",
+                players: [
+                    { ...teamSPlayers[0], team: "Scovell" },
+                    { ...teamSPlayers[1], team: "Scovell" },
+                    { ...teamSPlayers[2], team: "Scovell" },
+                    { ...teamSPlayers[3], team: "Scovell" }
+                ]
+            },
+            {
+                time: "2:38 PM",
+                players: [
+                    { ...teamGPlayers[0], team: "Gauer" },
+                    { ...teamGPlayers[1], team: "Gauer" },
+                    { ...teamGPlayers[2], team: "Gauer" },
+                    { ...teamGPlayers[3], team: "Gauer" }
+                ]
+            },
+            {
+                time: "2:46 PM",
+                players: [
+                    { ...teamSPlayers[4], team: "Scovell" },
+                    { ...teamSPlayers[5], team: "Scovell" },
+                    { ...teamSPlayers[6], team: "Scovell" },
+                    { ...teamSPlayers[7], team: "Scovell" }
+                ]
+            },
+            {
+                time: "2:54 PM",
+                players: [
+                    { ...teamGPlayers[4], team: "Gauer" },
+                    { ...teamGPlayers[5], team: "Gauer" },
+                    { ...teamGPlayers[6], team: "Gauer" },
+                    { ...teamGPlayers[7], team: "Gauer" }
+                ]
+            }
+        ];
+
+        let currentGroupIndex = 0;
+        const totalGroups = groups.length;
+
+        // Update the group counter display
+        function updateGroupCounter() {
+            document.getElementById('current-group').textContent = currentGroupIndex + 1;
+            document.getElementById('total-groups').textContent = totalGroups;
+            
+            // Update button states
+            document.getElementById('prev-btn').disabled = currentGroupIndex === 0;
+            document.getElementById('next-btn').disabled = currentGroupIndex === totalGroups - 1;
+        }
+
+        // Function to display a specific group
+        function displayGroup(index) {
+            const group = groups[index];
+            const container = document.getElementById('pairings-container');
+            
+            // Update tee time
+            document.getElementById('tee-time-display').textContent = group.time;
+            
+            // Clear current pairings
+            container.innerHTML = '';
+            
+            // Add new pairings
+            group.players.forEach((player, i) => {
+                const card = document.createElement('div');
+                card.className = 'golfer-card bg-gradient-to-r from-green-800 to-green-600 opacity-70 backdrop-blur-sm rounded-xl p-6 shadow-xl border border-green-300 border-opacity-30';
+                card.style.setProperty('--order', i);
+                
+                const teamClass = player.team === 'Scovell' ? 'team-S' : 'team-G';
+                
+                card.innerHTML = `
+                    <div class="card-content">
+                        <div class="flex items-center ml-4 mr-4">
+                            <!-- <div class="player-number w-16 h-16 rounded-full bg-white flex items-center justify-center text-3xl font-bold mr-4"> -->
+                                <!-- ${i + 1} -->
+                            <!-- </div> -->
+                            <div class="mr-4">
+                                <img src="${player.image}" alt="${player.name}" class="headshot">
+                            </div>
+                            <div class="player-bio-container">
+                                <h3 class="text-2xl font-bold">${player.name}</h3>
+                                <div class="flex items-center text-green-200">
+                                    <img src="https://flagcdn.com/w20/${player.flag}.png" alt="${player.country}" class="country-flag">
+                                    <span>${player.country}</span>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xl">Handicap: <span class="font-bold">${player.handicap}</span></div>
+                                <div class="text-sm text-green-200">${player.quote}</div>
+                            </div>
+                        </div>
+                        <span class="team-badge ${teamClass}">Team ${player.team}</span>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+            
+            updateGroupCounter();
+        }
+              
+        // Function to show next group
+        function nextGroup() {
+            if (currentGroupIndex < totalGroups - 1) {
+                currentGroupIndex++;
+                displayGroup(currentGroupIndex);
+            }
+        }
+        
+        // Function to show previous group
+        function previousGroup() {
+            if (currentGroupIndex > 0) {
+                currentGroupIndex--;
+                displayGroup(currentGroupIndex);
+            }
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            displayGroup(0);
+        });
+    </script>
+	
+	</body>
+	<footer class="bg-green-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <div class="golf-ball"></div>
+                        <h2 class="text-xl font-bold">Rooney Golf Trip</h2>
+                    </div>
+                    <p class="text-green-300 mt-2">August 22-24, 2025 • Wheeling, WV</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-green-300 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-green-300 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-green-300 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-green-300 hover:text-white transition"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-green-800 mt-6 pt-6 text-center text-green-400 text-sm">
+                <p>© 2025 Rooney Golf Trip. All rights reserved.</p>
+            </div>
+        </div>
+	</footer>
+</html>

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf Team Player Cards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .player-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        .player-card:hover {
+            transform: translateY(-5px) rotateX(5deg);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .player-image {
+            background-size: cover;
+            background-position: center;
+            transition: all 0.3s ease;
+        }
+        .player-card:hover .player-image {
+            transform: scale(1.05);
+        }
+        .team-flag {
+            width: 30px;
+            height: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .stats-bar {
+            height: 4px;
+            transition: width 0.5s ease;
+        }
+        .handicap-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen py-12 px-4">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-4xl font-bold text-center mb-12 text-gray-800">
+            <i class="fas fa-golf-ball mr-3 text-green-600"></i> Ryder Cup Teams
+        </h1>
+        
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Team USA -->
+            <div class="flex-1">
+                <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-4 mb-6 shadow-lg">
+                    <div class="flex items-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" class="team-flag mr-3">
+                        <h2 class="text-2xl font-bold text-white">Team USA</h2>
+                        <span class="ml-auto bg-white text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">4 Players</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Player 1 -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div class="handicap-badge bg-blue-600 text-white">+2.4</div>
+                        <div class="player-image h-48 bg-[url('https://images.unsplash.com/photo-1600180758890-6b99059b6acb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80')]"></div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Jordan Spieth</h3>
+                                    <p class="text-gray-600">Age: 29</p>
+                                </div>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-semibold">Captain</span>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">92%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-blue-600 h-2 rounded-full" style="width: 92%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">88%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-green-500 h-2 rounded-full" style="width: 88%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">95%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-yellow-500 h-2 rounded-full" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 15 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 3 Majors
+                                    </span>
+                                </div>
+                                <button class="text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Player 2 -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div class="handicap-badge bg-blue-600 text-white">+3.1</div>
+                        <div class="player-image h-48 bg-[url('https://images.unsplash.com/photo-1622038378189-5d6e3adf0b2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80')]"></div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Justin Thomas</h3>
+                                    <p class="text-gray-600">Age: 30</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">89%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-blue-600 h-2 rounded-full" style="width: 89%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">91%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-green-500 h-2 rounded-full" style="width: 91%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">87%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-yellow-500 h-2 rounded-full" style="width: 87%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 12 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 2 Majors
+                                    </span>
+                                </div>
+                                <button class="text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Player 3 -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div class="handicap-badge bg-blue-600 text-white">+1.8</div>
+                        <div class="player-image h-48 bg-[url('https://images.unsplash.com/photo-1575408264798-b50b252663e6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80')]"></div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Brooks Koepka</h3>
+                                    <p class="text-gray-600">Age: 33</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">94%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-blue-600 h-2 rounded-full" style="width: 94%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-green-500 h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">90%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-yellow-500 h-2 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 18 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 5 Majors
+                                    </span>
+                                </div>
+                                <button class="text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Player 4 -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div class="handicap-badge bg-blue-600 text-white">+2.9</div>
+                        <div class="player-image h-48 bg-[url('https://images.unsplash.com/photo-1519861531473-9200266088e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80')]"></div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Dustin Johnson</h3>
+                                    <p class="text-gray-600">Age: 38</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">96%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-blue-600 h-2 rounded-full" style="width: 96%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">87%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-green-500 h-2 rounded-full" style="width: 87%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">89%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-yellow-500 h-2 rounded-full" style="width: 89%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 24 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 2 Majors
+                                    </span>
+                                </div>
+                                <button class="text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Europe -->
+            <div class="flex-1">
+                <div class="bg-gradient-to-r from-blue-900 to-blue-700 rounded-xl p-4 mb-6 shadow-lg">
+                    <div class="flex items-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" class="team-flag mr-3">
+                        <h2 class="text-2xl font-bold text-white">Team Europe</h2>
+                        <span class="ml-auto bg-white text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">4 Players</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Player 1 -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div class="handicap-badge bg-blue-900 text-white">+3.2</div>
+                        <div class="player-image h-48 bg-[url('https://images.unsplash.com/photo-1543351611-58f69d7c1781?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80')]"></div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Rory McIlroy</h3>
+                                    <p class="text-gray-600">Age: 34</p>
+                                </div>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-semibold">Captain</span>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">95%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-blue-600 h-2 rounded-full" style="width: 95%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">90%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-green-500 h-2 rounded-full" style="width: 90%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">93%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-yellow-500 h-2 rounded-full" style="width: 93%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 23 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 4 Majors
+                                    </span>
+                                </div>
+                                <button class="text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Player 2 -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div class="handicap-badge bg-blue-900 text-white">+2.7</div>
+                        <div class="player-image h-48 bg-[url('https://images.unsplash.com/photo-1589998059171-988d322dfad6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80')]"></div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Jon Rahm</h3>
+                                    <p class="text-gray-600">Age: 28</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">93%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-blue-600 h-2 rounded-full" style="width: 93%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">92%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-green-500 h-2 rounded-full" style="width: 92%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">91%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-yellow-500 h-2 rounded-full" style="width: 91%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 20 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 2 Majors
+                                    </span>
+                                </div>
+                                <button class="text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Player 3 -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div class="handicap-badge bg-blue-900 text-white">+2.1</div>
+                        <div class="player-image h-48 bg-[url('https://images.unsplash.com/photo-1600180758890-6b99059b6acb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80')]"></div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Viktor Hovland</h3>
+                                    <p class="text-gray-600">Age: 25</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">91%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-blue-600 h-2 rounded-full" style="width: 91%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">94%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-green-500 h-2 rounded-full" style="width: 94%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">92%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-yellow-500 h-2 rounded-full" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 8 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 1 Major
+                                    </span>
+                                </div>
+                                <button class="text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Player 4 -->
+                    <div class="player-card bg-white rounded-xl overflow-hidden shadow-md relative">
+                        <div class="handicap-badge bg-blue-900 text-white">+2.5</div>
+                        <div class="player-image h-48 bg-[url('https://images.unsplash.com/photo-1519861531473-9200266088e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80')]"></div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Tyrrell Hatton</h3>
+                                    <p class="text-gray-600">Age: 31</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm font-medium text-gray-700">Driving</span>
+                                    <span class="text-sm font-medium text-gray-700">89%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-blue-600 h-2 rounded-full" style="width: 89%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Putting</span>
+                                    <span class="text-sm font-medium text-gray-700">93%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-green-500 h-2 rounded-full" style="width: 93%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between mb-1 mt-3">
+                                    <span class="text-sm font-medium text-gray-700">Short Game</span>
+                                    <span class="text-sm font-medium text-gray-700">90%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="stats-bar bg-yellow-500 h-2 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 flex justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-trophy text-yellow-500 mr-1"></i> 10 Wins
+                                    </span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-700">
+                                        <i class="fas fa-star text-blue-500 mr-1"></i> 0 Majors
+                                    </span>
+                                </div>
+                                <button class="text-blue-600 hover:text-blue-800">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-12 text-center">
+            <button id="compareBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">
+                <i class="fas fa-exchange-alt mr-2"></i> Compare Players
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Simple animation for stats bars on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const statsBars = document.querySelectorAll('.stats-bar');
+            
+            statsBars.forEach(bar => {
+                const originalWidth = bar.style.width;
+                bar.style.width = '0%';
+                
+                setTimeout(() => {
+                    bar.style.width = originalWidth;
+                }, 100);
+            });
+            
+            // Compare button functionality
+            document.getElementById('compareBtn').addEventListener('click', function() {
+                alert('Player comparison feature would go here!');
+            });
+            
+            // Add hover effect to all player cards
+            const playerCards = document.querySelectorAll('.player-card');
+            playerCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const image = this.querySelector('.player-image');
+                    image.style.transform = 'scale(1.05)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const image = this.querySelector('.player-image');
+                    image.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
