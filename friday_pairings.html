@@ -84,7 +84,7 @@
             width: 24px;
             height: 16px;
             border-radius: 2px;
-            margin-right: 8px;
+            margin-right: 4px;            
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
         }
         
@@ -163,8 +163,8 @@
         
         .player-info-container {
             flex: 1;
-            margin-right: 20px;
         }
+
         .rules-card {
             background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(236,253,245,0.95) 100%);
         }
@@ -193,12 +193,55 @@
         }
     </style>
 </head>
+        
+        <header class="bg-green-800 text-white p-6 shadow-lg">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-2xl font-bold">Rooney Golf Trip 2025</h1>
+                </div>
+            </div>
+        </header>
+	
+	
+	<div class="max-w-full mx-auto">
+        
+		<!-- Scoreboard Ribbon -->
+        <div class="flex w-full">
+            <!-- Team 1 -->
+            <div class="w-1/2 bg-gradient-to-r from-blue-600 to-blue-900 text-white p-4 flex items-center justify-between">
+                <div class="text-center">
+                    <div class="text-xl font-bold" id="team1-name">Team</div>
+                    <div class="text-xl font-bold" id="team1-name">Scovell</div>
+                </div>
+                <div class="text-5xl font-bold" id="team1-score">0</div>
+            </div>
+
+            <!-- VS Separator -->
+            <div class="bg-gray-800 text-white flex items-center justify-center px-4">
+                <span class="text-xl font-bold">VS</span>
+            </div>
+
+            <!-- Team 2 -->
+            <div class="w-1/2 bg-gradient-to-r from-red-900 to-red-700 text-white p-6 flex items-center justify-between">
+                <div class="text-5xl font-bold" id="team2-score">0</div>
+                <div class="text-center">
+                    <div class="text-xl font-bold" id="team2-name">Team</div>
+                    <div class="text-xl font-bold" id="team2-name">Gauer</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <body class="bg-green-50 min-h-screen">
-    <div class="max-w-4xl mx-8">
+    <div class="mx-8">       
         <!-- Header -->
-        <div class="text-center mt-12 mb-12">
-            <h1 class="text-3xl font-bold mb-2 text-green-900">Friday Pairings</h1>
-			<p class="text-xl italic text-green-700">8v8 Best Ball: Best six (6) scores count on each hole. Losing teams buys dinner.</p>
+        <div class="text-center mt-12 mb-12">            
+            <h1 class="text-4xl font-bold mb-2 text-green-900">
+                <i class="fa-solid fa-golf-ball-tee"></i>
+                Friday Pairings
+                <i class="fa-solid fa-golf-ball-tee"></i>
+            </h1>
+			<p class="text-lg text-green-700 max-w-2xl mx-auto"> 8v8 Best Ball: Best six (6) scores count on each hole. Losing teams buys dinner.</p>
         </div>
 		
 		<!-- Palmer Course -->
@@ -331,7 +374,7 @@
                 image: "Headshots/Pat-removebg-preview.png"
             },
             {
-                name: "Bryant 'Bigs' Bigler ",
+                name: "Bryant Bigler ",
                 country: "United States",
                 flag: "us",
                 handicap: "15",
@@ -383,7 +426,7 @@
                 country: "United States",
                 flag: "us",
                 handicap: "5",
-                superpower: "Sporadic Duck Hook",
+                superpower: "Height",
                 image: "Headshots/Billman-removebg-preview.png"
             }
         ];
@@ -551,7 +594,7 @@
                 
                 card.innerHTML = `
                     <div class="card-content">
-                        <div class="flex items-center ml-4 mr-4">
+                        <div class="flex items-center justify-between">
                             <!-- <div class="player-number w-16 h-16 rounded-full bg-white flex items-center justify-center text-3xl font-bold mr-4"> -->
                                 <!-- ${i + 1} -->
                             <!-- </div> -->
@@ -559,14 +602,14 @@
                                 <img src="${player.image}" alt="${player.name}" class="headshot">
                             </div>
                             <div class="player-info-container">
-                                <h3 class="text-2xl font-bold">${player.name}</h3>
-                                <div class="flex items-center text-green-200">
+                                <h3 class="text-xl font-bold">${player.name}</h3>
+                                <div class="flex items-center test-sm text-green-200">
                                     <img src="https://flagcdn.com/w20/${player.flag}.png" alt="${player.country}" class="country-flag">
                                     <span>${player.country}</span>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <div class="text-xl">Handicap: <span class="font-bold">${player.handicap}</span></div>
+                                <div class="text-xl">HCP: <span class="font-bold">${player.handicap}</span></div>
                                 <div class="text-sm text-green-200">${player.superpower}</div>
                             </div>
                         </div>
@@ -601,17 +644,18 @@
             displayGroup(0);
         });
     </script>
+</div>
 </body>
 	
 	<footer class="bg-green-900 text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mx-2">
+            <div class="flex flex-col md:flex-row justify-space between items-center">
                 <div class="mb-4 md:mb-0">
-                    <div class="flex items-center space-x-2">
+                    <div class="flex justify-space between items-center">
                         <div class="golf-ball"></div>
-                        <h2 class="text-xl font-bold">Rooney Golf Trip</h2>
+                        <h2 class="text-xl font-bold">Rooney Golf Trip 2025</h2>
                     </div>
-                    <p class="text-green-300 mt-2">August 22-24, 2025 • Wheeling, WV</p>
+                    <p class="text-green-300 mt-2">August 22-24, 2025 • Oglebay, WV</p>
                 </div>
                 <div class="flex space-x-6">
                     <a href="#" class="text-green-300 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>

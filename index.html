@@ -124,7 +124,7 @@
         }
         .trip-card {
             perspective: 1000px;
-            width: clamp(300px, 50vw, 600px);
+            width: clamp(300px, 100%, 600px);
         }
         
         .trip-card-inner {
@@ -140,6 +140,7 @@
         {
             display: flex;
             flex-wrap: wrap;
+            padding: 4px;
             gap: 1em;
             align-items: center;
             justify-content: space-around;
@@ -197,11 +198,11 @@
     </style>
 </head>
 <body class="bg-green-50 min-h-screen">
-    <header class="bg-green-800 text-white py-6 shadow-lg">
-        <div class="container mx-auto px-4">
+    <header class="bg-green-800 text-white p-6 shadow-lg">
+        <div class="mx-auto">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4">
-                    <h1 class="text-3xl font-bold">Rooney Golf Trip 2025</h1>
+                    <h1 class="text-2xl font-bold">Rooney Golf Trip 2025</h1>
                 </div>
             </div>
         </div>
@@ -213,9 +214,10 @@
 		<!-- Scoreboard Ribbon -->
         <div class="flex w-full">
             <!-- Team 1 -->
-            <div class="w-1/2 bg-blue-600 text-white p-6 flex items-center justify-between">
+            <div class="w-1/2 bg-gradient-to-r from-blue-600 to-blue-900 text-white p-4 flex items-center justify-between">
                 <div class="text-center">
-                    <div class="text-2xl font-bold" id="team1-name">Team Scovell</div>
+                    <div class="text-xl font-bold" id="team1-name">Team</div>
+                    <div class="text-xl font-bold" id="team1-name">Scovell</div>
                 </div>
                 <div class="text-5xl font-bold" id="team1-score">0</div>
             </div>
@@ -226,10 +228,11 @@
             </div>
 
             <!-- Team 2 -->
-            <div class="w-1/2 bg-red-600 text-white p-6 flex items-center justify-between">
+            <div class="w-1/2 bg-gradient-to-r from-red-900 to-red-700 text-white p-6 flex items-center justify-between">
                 <div class="text-5xl font-bold" id="team2-score">0</div>
                 <div class="text-center">
-                    <div class="text-2xl font-bold" id="team2-name">Team Gauer</div>
+                    <div class="text-xl font-bold" id="team2-name">Team</div>
+                    <div class="text-xl font-bold" id="team2-name">Gauer</div>
                 </div>
             </div>
         </div>
