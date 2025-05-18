@@ -61,7 +61,7 @@
                 transform: scale(1);
             }
             50% {
-                transform: scale(1.05);
+                transform: scale(1.02);
             }
         }
         
@@ -111,10 +111,17 @@
             font-weight: bold;
             backdrop-filter: blur(5px);
         }
-        
+
+        .scoreboard-container {
+            display: flex;
+            width: min(800px, 100%);
+            margin: 0 auto;                       
+            justify-content: space-evenly;
+        }
+
         .team-badge {
             position: absolute;
-            top: -35%;
+            top: -5px;
             right: 20px;
             transform: translateY(-50%);
             padding: 6px 12px;
@@ -157,12 +164,17 @@
         }
         
         .card-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: relative;
             width: 100%;
         }
         
         .player-info-container {
-            flex: 1;
+            display: flex;
+            flex-direction: column;
+            
         }
 
         .rules-card {
@@ -206,7 +218,7 @@
 	<div class="max-w-full mx-auto">
         
 		<!-- Scoreboard Ribbon -->
-        <div class="flex w-full">
+        <div class="scoreboard-container">
             <!-- Team 1 -->
             <div class="w-1/2 bg-gradient-to-r from-blue-600 to-blue-900 text-white p-4 flex items-center justify-between">
                 <div class="text-center">
@@ -248,7 +260,7 @@
 				<div class="course-card mb-12 rounded-xl shadow-lg overflow-hidden">
                     <div class="relative h-24 bg-green-700 overflow-hidden">
                         <img src="Courses/Palmer.jpg" 
-                             alt="Palmer Course" class="w-full h-full object-cover opacity-80">
+                             alt="Palmer Course" class="max-w-4xl w-full h-full object-cover opacity-80">
                         <div class="absolute inset-0 bg-gradient-to-t from-green-900 to-transparent opacity-70"></div>
                         <div class="absolute bottom-0 left-0 p-6">
                             <h3 class="text-1xl font-bold text-white">Arnold Palmer Course</h3>
@@ -595,21 +607,22 @@
                 card.innerHTML = `
                     <div class="card-content">
                         <div class="flex items-center justify-between">
-                            <!-- <div class="player-number w-16 h-16 rounded-full bg-white flex items-center justify-center text-3xl font-bold mr-4"> -->
-                                <!-- ${i + 1} -->
-                            <!-- </div> -->
                             <div class="mr-4">
                                 <img src="${player.image}" alt="${player.name}" class="headshot">
                             </div>
                             <div class="player-info-container">
                                 <h3 class="text-xl font-bold">${player.name}</h3>
-                                <div class="flex items-center test-sm text-green-200">
-                                    <img src="https://flagcdn.com/w20/${player.flag}.png" alt="${player.country}" class="country-flag">
-                                    <span>${player.country}</span>
+                                <div class="text-xl font-bold">HCP: <span class="font-bold">${player.handicap}</span></div>
+                                
                                 </div>
                             </div>
-                            <div class="text-right">
-                                <div class="text-xl">HCP: <span class="font-bold">${player.handicap}</span></div>
+                            
+                            <div class="player-info-container align-items-center">
+                                <div class="text-sm text-green-200">
+                                    <span>
+                                        <img src="https://flagcdn.com/w20/${player.flag}.png" alt="${player.country}" class="country-flag"> ${player.country}
+                                    </span>
+                                </div>
                                 <div class="text-sm text-green-200">${player.superpower}</div>
                             </div>
                         </div>
