@@ -92,7 +92,13 @@
                 text-align: justify;
             }
             
-		
+		.scoreboard-container {
+            display: flex;
+            width: min(800px, 100%);
+            margin: 0 auto;                       
+            justify-content: space-evenly;
+        }
+
 		.scorecard-image {
             width: 100%;
 			max-width: 500px;
@@ -230,7 +236,7 @@
 	<div class="max-w-full mx-auto">
         
 		<!-- Scoreboard Ribbon -->
-        <div class="flex max-w-2xl w-full">
+        <div class="scoreboard-container">
             <!-- Team 1 -->
             <div class="w-1/2 bg-gradient-to-r from-blue-600 to-blue-900 text-white p-4 flex items-center justify-between">
                 <div class="text-center">
