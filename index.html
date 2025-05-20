@@ -190,7 +190,25 @@
         
         .trip-score-badge {
             transition: all 0.3s ease;
+            background-color: #000000;
+            color: rgb(255, 187, 0);
+            padding: 0.25em 0.5em;
+            border-radius: 1em;
+            font-size: small;
+            text-align: center;
+            
+            
         }
+
+        .trip-stats-box {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            background-color: rgb(255, 255, 255);
+            padding: 2px;
+            border-radius: 10%;
+        }
+
         .trip-score-badge:hover {
             transform: scale(1.1);
         }
@@ -1573,13 +1591,13 @@
                                     <p class="text-gray-700">1:00 PM - Check-in at Oglebay Resort</p>
                                 </div>
                             </div>
-                            <div class="teetime">
+                            <div class="flex items-start">
                                 <div class="flex-shrink-0 h-6 w-6 text-green-600 flex items-center justify-center">
                                     <i class="fas fa-golf-ball"></i>
                                 </div>
                                 <div class="ml-3">
                                     <p class="text-gray-700">2:30 PM - Practice Round: Arnold Palmer Course (8v8 Best Ball)</p>
-									<p class="text-gray-700 indent-8 italic">- Best six (6) scores count on each hole. Losing teams buys dinner. </p>
+									<p class="text-gray-700 italic">- Best six (6) scores count on each hole. Losing teams buys dinner. </p>
                                 </div>
 								<div class="ml-auto">
 								<a href="friday_pairings.html">
@@ -1695,7 +1713,7 @@
                 <div class="trip-card-inner bg-white rounded-2xl overflow-hidden shadow-lg">
                     <!-- Hero photo of the golf course -->
                     <div class="trip-photo-container relative">
-                        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                        <img src="Trips/2024-Gull-Lake.jpeg"
                             alt="Golf Course" class="trip-course-photo">
                                     
                         <div class="trip-golf-ball">
@@ -1720,29 +1738,28 @@
                         <div class="bg-gray-50 rounded-lg p-4 mb-4">
                             <div class="flex justify-between items-center mb-2">
                                 <div>
-                                    <p class="text-sm text-gray-600">Your Score</p>
+                                    <p class="text-sm text-gray-600">Trip Report</p>
                                     <div class="flex items-center">
-                                        <span class="text-2xl font-bold mr-2">82</span>
-                                        <span class="text-sm text-gray-500">(+10)</span>
+                                        <span class="text-xl font-bold mr-2">T-Town Tussle</span>                                        
                                     </div>
                                 </div>
-                                <div class="trip-score-badge bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                                    <i class="fas fa-trophy mr-1"></i> Team King
+                                <div class="trip-score-badge">
+                                    <i class="fas fa-trophy mr-1"></i> Team Brower
                                 </div>
                             </div>
                             
                             <div class="grid grid-cols-3 gap-2 text-center">
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">Fairways</p>
-                                    <p class="font-bold">8/14</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">New Hats</p>
+                                    <p class="font-bold">16</p>
                                 </div>
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">GIR</p>
-                                    <p class="font-bold">10/18</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">One Arm Swings</p>
+                                    <p class="font-bold">172</p>
                                 </div>
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">Putts</p>
-                                    <p class="font-bold">32</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">Revenge Putts</p>
+                                    <p class="font-bold">1</p>
                                 </div>
                             </div>
                         </div>
@@ -1755,7 +1772,7 @@
                 <div class="trip-card-inner bg-white rounded-2xl overflow-hidden shadow-lg">
                     <!-- Hero photo of the golf course -->
                     <div class="trip-photo-container relative">
-                        <img src="Trips/2024-Gull-Lake.jpeg" 
+                        <img src="Trips/2023-Zanesville.jpg" 
                             alt="Golf Course" class="trip-course-photo">
                                     
                         <div class="trip-golf-ball">
@@ -1769,11 +1786,11 @@
                         <div class="flex justify-between items-center mb-4">
                             <div>
                                 <p class="text-sm text-gray-500">Location</p>
-                                <h3 class="text-xl font-bold">Zanesville, OH</h3>
+                                <h3 class="text-xl font-bold">The Virtues, OH</h3>
                             </div>
                             <div class="text-right">
                                 <p class="text-sm text-gray-500">Played on</p>
-                                <p class="font-medium">June 12, 2023</p>
+                                <p class="font-medium">June 9, 2023</p>
                             </div>
                         </div>
                         
@@ -1781,29 +1798,28 @@
                         <div class="bg-gray-50 rounded-lg p-4 mb-4">
                             <div class="flex justify-between items-center mb-2">
                                 <div>
-                                    <p class="text-sm text-gray-600">Your Score</p>
+                                    <p class="text-sm text-gray-600">Trip Report</p>
                                     <div class="flex items-center">
-                                        <span class="text-2xl font-bold mr-2">82</span>
-                                        <span class="text-sm text-gray-500">(+10)</span>
+                                        <span class="text-xl font-bold mr-2">Keenan Cup</span>
                                     </div>
                                 </div>
-                                <div class="trip-score-badge bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                                <div class="trip-score-badge">
                                     <i class="fas fa-trophy mr-1"></i> Team BK
                                 </div>
                             </div>
                             
                             <div class="grid grid-cols-3 gap-2 text-center">
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">Fairways</p>
-                                    <p class="font-bold">8/14</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">Holes Not Played</p>
+                                    <p class="font-bold">9</p>
                                 </div>
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">GIR</p>
-                                    <p class="font-bold">10/18</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">Ghost Victories</p>
+                                    <p class="font-bold">5</p>
                                 </div>
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">Putts</p>
-                                    <p class="font-bold">32</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">"Softball" Injuries</p>
+                                    <p class="font-bold">1</p>
                                 </div>
                             </div>
                         </div>
@@ -1834,7 +1850,7 @@
                             </div>
                             <div class="text-right">
                                 <p class="text-sm text-gray-500">Played on</p>
-                                <p class="font-medium">June 12, 2022</p>
+                                <p class="font-medium">June 3, 2022</p>
                             </div>
                         </div>
                         
@@ -1842,29 +1858,28 @@
                         <div class="bg-gray-50 rounded-lg p-4 mb-4">
                             <div class="flex justify-between items-center mb-2">
                                 <div>
-                                    <p class="text-sm text-gray-600">Your Score</p>
+                                    <p class="text-sm text-gray-600">Trip Report</p>
                                     <div class="flex items-center">
-                                        <span class="text-2xl font-bold mr-2">82</span>
-                                        <span class="text-sm text-gray-500">(+10)</span>
+                                        <span class="text-xl font-bold mr-2">Cotrill Cup</span>
                                     </div>
                                 </div>
-                                <div class="trip-score-badge bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                                <div class="trip-score-badge">
                                     <i class="fas fa-trophy mr-1"></i> Team Cory
                                 </div>
                             </div>
                             
                             <div class="grid grid-cols-3 gap-2 text-center">
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">Fairways</p>
-                                    <p class="font-bold">8/14</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">New Guys</p>
+                                    <p class="font-bold">4</p>
                                 </div>
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">GIR</p>
-                                    <p class="font-bold">10/18</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">Death Box Escapes</p>
+                                    <p class="font-bold">0</p>
                                 </div>
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">Putts</p>
-                                    <p class="font-bold">32</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">Match Putts</p>
+                                    <p class="font-bold">1</p>
                                 </div>
                             </div>
                         </div>
@@ -1903,29 +1918,28 @@
                         <div class="bg-gray-50 rounded-lg p-4 mb-4">
                             <div class="flex justify-between items-center mb-2">
                                 <div>
-                                    <p class="text-sm text-gray-600">Your Score</p>
+                                    <p class="text-sm text-gray-600">Trip Report</p>
                                     <div class="flex items-center">
-                                        <span class="text-2xl font-bold mr-2">82</span>
-                                        <span class="text-sm text-gray-500">(+10)</span>
+                                        <span class="text-xl font-bold mr-2">Dan v Pat II</span>
                                     </div>
                                 </div>
-                                <div class="trip-score-badge bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                                    <i class="fas fa-trophy mr-1"></i> Team Rooney
+                                <div class="trip-score-badge">
+                                    <i class="fas fa-trophy mr-1"></i> Team Dan
                                 </div>
                             </div>
                             
                             <div class="grid grid-cols-3 gap-2 text-center">
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">Fairways</p>
-                                    <p class="font-bold">8/14</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">Matching Shirts</p>
+                                    <p class="font-bold">12</p>
                                 </div>
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">GIR</p>
-                                    <p class="font-bold">10/18</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">Shark Sightings</p>
+                                    <p class="font-bold">64</p>
                                 </div>
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">Putts</p>
-                                    <p class="font-bold">32</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">Fires Extinguished</p>
+                                    <p class="font-bold">1</p>
                                 </div>
                             </div>
                         </div>
@@ -1952,11 +1966,11 @@
                         <div class="flex justify-between items-center mb-4">
                             <div>
                                 <p class="text-sm text-gray-500">Location</p>
-                                <h3 class="text-xl font-bold">Gaylord, MI</h3>
+                                <h3 class="text-xl font-bold">Treetops, MI</h3>
                             </div>
                             <div class="text-right">
                                 <p class="text-sm text-gray-500">Played on</p>
-                                <p class="font-medium">June 12, 2020</p>
+                                <p class="font-medium">October 9, 2020</p>
                             </div>
                         </div>
                         
@@ -1964,29 +1978,29 @@
                         <div class="bg-gray-50 rounded-lg p-4 mb-4">
                             <div class="flex justify-between items-center mb-2">
                                 <div>
-                                    <p class="text-sm text-gray-600">Your Score</p>
+                                    <p class="text-sm text-gray-600">Trip Report</p>
                                     <div class="flex items-center">
-                                        <span class="text-2xl font-bold mr-2">82</span>
-                                        <span class="text-sm text-gray-500">(+10)</span>
+                                        <span class="text-xl font-bold mr-2">Dan v Pat</span>
+                                        
                                     </div>
                                 </div>
-                                <div class="trip-score-badge bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                                    <i class="fas fa-trophy mr-1"></i> Team Not Dan
+                                <div class="trip-score-badge">
+                                    <i class="fas fa-trophy mr-1"></i> Team Pat
                                 </div>
                             </div>
                             
                             <div class="grid grid-cols-3 gap-2 text-center">
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">Fairways</p>
-                                    <p class="font-bold">8/14</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">Negative COVID Tests</p>
+                                    <p class="font-bold">12</p>
                                 </div>
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">GIR</p>
-                                    <p class="font-bold">10/18</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">Lost Balls</p>
+                                    <p class="font-bold">39</p>
                                 </div>
-                                <div class="bg-white p-2 rounded">
-                                    <p class="text-xs text-gray-500">Putts</p>
-                                    <p class="font-bold">32</p>
+                                <div class="trip-stats-box">
+                                    <p class="text-xs text-gray-500">Lives Saved</p>
+                                    <p class="font-bold">1</p>
                                 </div>
                             </div>
                         </div>
