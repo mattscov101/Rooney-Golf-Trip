@@ -243,7 +243,7 @@
                     <div class="text-xl font-bold" id="team1-name">Team</div>
                     <div class="text-xl font-bold" id="team1-name">Scovell</div>
                 </div>
-                <div class="text-5xl font-bold" id="team1-score">0</div>
+                <div class="text-5xl font-bold"><p id="team1-score"></p></div>
             </div>
 
             <!-- VS Separator -->
@@ -253,7 +253,7 @@
 
             <!-- Team 2 -->
             <div class="w-1/2 bg-gradient-to-r from-red-900 to-red-700 text-white p-6 flex items-center justify-between">
-                <div class="text-5xl font-bold" id="team2-score">0</div>
+                <div class="text-5xl font-bold" id="team2-score"></div>
                 <div class="text-center">
                     <div class="text-xl font-bold" id="team2-name">Team</div>
                     <div class="text-xl font-bold" id="team2-name">Gauer</div>
@@ -2036,6 +2036,31 @@
                 scoreBadge.classList.toggle('ring-green-200');
             }, 2000);
         });
+
+        // Retrieve data from Rooney Golf Trip Google Sheet
+        const url = "https://script.google.com/macros/s/AKfycbwZP5EahX37_kVdT5-BiFzLPXCbG3W377ROWBnBBi0TeFwr-zMrhTqnZ5JitGUqiPDStg/exec" // enter your public ('access' - 'anyone') deployment URL (NOT test deployment!)
+        
+        // fetching the data from each column in the sheet
+        // then populating the respective datalist
+        const output_team1score = document.getElementById("team1-score"); // Initialize team 1 score
+        const output_team2score = document.getElementById("team2-score"); // Initialize team 1 score
+
+        fetch(`${url}?header=Scovell`)
+            .then((response) => response.json())
+            .then(({ data }) => {
+                console.log(data);
+                output_team1score.innerHTML = data;
+            })
+            .catch((error) => console.error('!!!!!!!!', error));
+            
+        fetch(`${url}?header=Gauer`)
+            .then((response) => response.json())
+            .then(({ data }) => {
+                console.log(data);
+                output_team2score.innerHTML = data;
+            })
+            .catch((error) => console.error('!!!!!!!!', error));
+
     </script>
 	
 	</body>
